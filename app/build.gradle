@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id "com.starter.easylauncher" version "5.0.0"
 }
 
 android {
@@ -21,6 +22,12 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        debug {
+
+        }
+        staging {
+            initWith debug
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -28,6 +35,20 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+}
+
+easylauncher {
+    buildTypes {
+        release {
+
+        }
+        debug {
+            filters = redRibbonFilter()
+        }
+        staging {
+            filters = blueRibbonFilter()
+        }
     }
 }
 
